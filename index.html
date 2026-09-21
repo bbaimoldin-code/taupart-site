@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tauman Partners — оценочная компания</title>
+  <meta name="description" content="ТОО «Tauman Partners» — оценка недвижимости, транспорта, оборудования и бизнеса в Казахстане. Отчёты, которым доверяют банки, суды и собственники.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Source+Sans+3:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="#" class="logo">Tauman Partners</a>
+
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <!-- "Когда нужна оценка" — контент готов (см. ДИЗАЙН_КОНЦЕПЦИЯ.md §4), но убран с главной; ссылка ведёт на будущую подстраницу услуг -->
+      <a href="#" data-i18n="nav.whenNeeded">Когда нужна оценка</a>
+      <a href="#projects" data-i18n="nav.projects">Проекты</a>
+      <a href="#useful" data-i18n="nav.useful">Полезное</a>
+      <!-- Страница "Партнёрам" ещё не сверстана (см. design-canvas/Partners.dc.html) -->
+      <a href="#" data-i18n="nav.partners">Партнёрам</a>
+      <a href="#about" data-i18n="nav.about">О компании</a>
+      <a href="#contact" data-i18n="nav.contacts">Контакты</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-switch" aria-label="Выбор языка">
+        <button type="button" data-lang-btn="kk" aria-current="false">ҚАЗ</button>
+        <button type="button" data-lang-btn="ru" aria-current="true">РУС</button>
+        <button type="button" data-lang-btn="en" aria-current="false">ENG</button>
+      </div>
+      <!-- Страница статуса заказа (трек-код без логина) — см. ИСТОРИЯ_ПРОЕКТА.md, отдельная задача -->
+      <a href="#" class="btn btn-outline" data-i18n="nav.status">Статус заказа</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow" data-i18n="hero.eyebrow">Эксперты по оценке имущества и интеллектуальной собственности</div>
+        <h1 data-i18n="hero.title">Оценка, которой доверяют банки, суды и собственники.</h1>
+        <p data-i18n="hero.subtitle">С нами надёжно: отчёты, подготовленные нашими специалистами, полностью соответствуют законодательству и стандартам Республики Казахстан и международным нормам МСФО (IAS, IFRS).</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Оставить заявку</a>
+          <a href="#" class="link-arrow">
+            <span data-i18n="hero.ctaSecondary">Узнать статус заказа</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-graphic" aria-hidden="true">
+        <svg width="380" height="300" viewBox="0 0 380 300" fill="none">
+          <g stroke="#d7dbe0" stroke-width="1">
+            <line x1="30" y1="50" x2="100" y2="30"/>
+            <line x1="100" y1="30" x2="175" y2="60"/>
+            <line x1="175" y1="60" x2="250" y2="35"/>
+            <line x1="250" y1="35" x2="330" y2="70"/>
+            <line x1="30" y1="50" x2="70" y2="125"/>
+            <line x1="100" y1="30" x2="150" y2="135"/>
+            <line x1="175" y1="60" x2="150" y2="135"/>
+            <line x1="175" y1="60" x2="225" y2="115"/>
+            <line x1="250" y1="35" x2="225" y2="115"/>
+            <line x1="330" y1="70" x2="305" y2="155"/>
+            <line x1="70" y1="125" x2="150" y2="135"/>
+            <line x1="225" y1="115" x2="305" y2="155"/>
+            <line x1="70" y1="125" x2="40" y2="195"/>
+            <line x1="150" y1="135" x2="110" y2="215"/>
+            <line x1="225" y1="115" x2="195" y2="205"/>
+            <line x1="305" y1="155" x2="270" y2="225"/>
+            <line x1="40" y1="195" x2="110" y2="215"/>
+            <line x1="110" y1="215" x2="195" y2="205"/>
+            <line x1="195" y1="205" x2="270" y2="225"/>
+            <line x1="270" y1="225" x2="340" y2="185"/>
+            <line x1="305" y1="155" x2="340" y2="185"/>
+          </g>
+          <g stroke="#17457a" stroke-width="1.5">
+            <line x1="150" y1="135" x2="225" y2="115"/>
+            <line x1="150" y1="135" x2="110" y2="215"/>
+            <line x1="225" y1="115" x2="270" y2="225"/>
+          </g>
+          <g fill="#c9ced6">
+            <circle cx="30" cy="50" r="4"/>
+            <circle cx="100" cy="30" r="4"/>
+            <circle cx="250" cy="35" r="4"/>
+            <circle cx="330" cy="70" r="4"/>
+            <circle cx="70" cy="125" r="4"/>
+            <circle cx="40" cy="195" r="4"/>
+            <circle cx="305" cy="155" r="4"/>
+            <circle cx="340" cy="185" r="4"/>
+          </g>
+          <g fill="#17457a">
+            <circle cx="175" cy="60" r="5"/>
+            <circle cx="150" cy="135" r="5"/>
+            <circle cx="225" cy="115" r="5"/>
+            <circle cx="110" cy="215" r="5"/>
+            <circle cx="195" cy="205" r="5"/>
+            <circle cx="270" cy="225" r="5"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Показатели компании">
+      <div class="stat is-live">
+        <div class="stat-flag">
+          <span class="stat-dot" aria-hidden="true"></span>
+          <span data-i18n="stats.reportsLabel">Live · по данным реестра</span>
+        </div>
+        <div class="stat-value" data-count="12680">0</div>
+        <div class="stat-caption" data-i18n="stats.reportsCaption">Отчётов об оценке подготовлено</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" data-i18n="stats.experienceValue">13 лет</div>
+        <div class="stat-caption" data-i18n="stats.experienceCaption">Средний опыт специалистов компании</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" data-i18n="stats.insuranceValue">21 625 000 ₸</div>
+        <div class="stat-caption" data-i18n="stats.insuranceCaption">Страхование ответственности каждого специалиста</div>
+      </div>
+    </section>
+
+    <section class="section" id="services" data-reveal>
+      <h2 class="section-heading" data-i18n="services.heading">Услуги</h2>
+
+      <div class="service-group-label" data-i18n="services.groupRealEstate">Недвижимость</div>
+      <ul class="service-list">
+        <li><span data-i18n="services.item1">Оценка недвижимого имущества и земельных участков</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+      </ul>
+
+      <div class="service-group-label" data-i18n="services.groupTransport">Транспорт и оборудование</div>
+      <ul class="service-list">
+        <li><span data-i18n="services.item2">Оценка производственного оборудования и технологических комплексов</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+        <li><span data-i18n="services.item3">Оценка транспортных средств и специализированной техники</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+        <li><span data-i18n="services.item4">Оценка основных средств, запасов и товаров в обороте</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+      </ul>
+
+      <div class="service-group-label" data-i18n="services.groupBusiness">Бизнес и активы</div>
+      <ul class="service-list">
+        <li><span data-i18n="services.item5">Оценка бизнеса (доли участия)</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+        <li><span data-i18n="services.item6">Оценка нематериальных активов</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+        <li><span data-i18n="services.item7">Оценка ценных бумаг</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+        <li><span data-i18n="services.item8">Оценка убытков и упущенной коммерческой выгоды</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="projects" data-reveal>
+      <h2 class="section-heading" data-i18n="projects.heading">Реализованные проекты</h2>
+      <p class="section-subtitle" data-i18n="projects.subtitle">Часть проектов, выполненных специалистами компании.</p>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p1.sector">Энергетика</div>
+          <div class="project-client" data-i18n="projects.p1.client">АО «KEGOC»</div>
+          <p class="project-desc" data-i18n="projects.p1.desc">Оценка справедливой стоимости основных средств для МСФО и 100% пакета акций для IPO.</p>
+        </article>
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p2.sector">Космическая отрасль</div>
+          <div class="project-client" data-i18n="projects.p2.client">АО «НК «Қазақстан Ғарыш Сапары»»</div>
+          <p class="project-desc" data-i18n="projects.p2.desc">Оценка недвижимого имущества и стартовых комплексов космодрома «Байконур».</p>
+        </article>
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p3.sector">Нефтегазовая отрасль</div>
+          <div class="project-client" data-i18n="projects.p3.client">ТОО «ҚазМұнайГаз Өнімдері»</div>
+          <p class="project-desc" data-i18n="projects.p3.desc">Оценка имущественных комплексов АЗС и нефтебаз в 14 регионах Казахстана.</p>
+        </article>
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p4.sector">Транспорт</div>
+          <div class="project-client" data-i18n="projects.p4.client">АО «КазТрансГаз»</div>
+          <p class="project-desc" data-i18n="projects.p4.desc">Оценка полного автопарка компании.</p>
+        </article>
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p5.sector">Железнодорожный транспорт</div>
+          <div class="project-client" data-i18n="projects.p5.client">АО «Локомотив»</div>
+          <p class="project-desc" data-i18n="projects.p5.desc">Оценка основных средств и долей участия в дочерних и зависимых организациях.</p>
+        </article>
+        <article class="project-card">
+          <div class="project-sector" data-i18n="projects.p6.sector">Горнорудная отрасль</div>
+          <div class="project-client" data-i18n="projects.p6.client">АО «Майкайынзолото»</div>
+          <p class="project-desc" data-i18n="projects.p6.desc">Оценка доли участия.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-useful" id="useful" data-reveal>
+      <h2 class="section-heading" data-i18n="useful.heading">Полезное</h2>
+      <div class="useful-panel">
+        <p data-i18n="useful.body">Раздел готовится: аналитика по оценке, разъяснения законодательства и новости компании появятся здесь при готовности контент-плана.</p>
+      </div>
+    </section>
+
+    <section class="about" id="about" data-reveal>
+      <div class="about-content">
+        <h2 data-i18n="about.heading">Команда профессиональных оценщиков и экспертов в сфере оценки</h2>
+        <p class="about-body" data-i18n="about.body">Под руководством директора-оценщика Баймолдина Бакытжана Нуржановича. Средний опыт специалистов компании — 13 лет. Оценочная деятельность ведётся в соответствии с законодательством Республики Казахстан и стандартами оценки.</p>
+      </div>
+      <div>
+        <ul class="trust-list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="about.point1">Квалификационные свидетельства оценщика у каждого специалиста</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="about.point2">Наши оценщики — члены палат оценщиков Казахстана</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="about.point3">Ответственность каждого специалиста застрахована на 21 625 000 ₸</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="about.point4">Положительный аудит отчётов сотрудников компании у крупнейших аудиторов (Deloitte Touche Tohmatsu, PricewaterhouseCoopers, Ernst &amp; Young, KPMG)</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="about.point5">Статус заказа отслеживается онлайн — без логина и пароля</span>
+          </li>
+        </ul>
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <img src="assets/images/palata1-logo.png" alt="Столичная палата профессиональных оценщиков">
+          </div>
+          <div class="trust-badge">
+            <img src="assets/images/palata2-logo.png" alt="Палата оценщиков «СРО «Содружество Оценщиков Казахстана»»">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" data-reveal>
+      <div class="contact-info">
+        <h2 class="section-heading" data-i18n="contact.heading">Контакты</h2>
+        <div class="contact-list">
+          <div><span data-i18n="contact.addressLabel">Адрес</span>: <span data-i18n="contact.address">г. Астана, пр. Тұран, 1</span></div>
+          <div><span data-i18n="contact.phoneLabel">Телефон</span>: <a href="tel:+77172797210">+7 7172 797 210</a></div>
+          <div><span data-i18n="contact.mobileLabel">Моб.</span>: <a href="tel:+77024141499">+7 702 414 14 99</a>, <a href="tel:+77078552299">+7 707 855 22 99</a></div>
+          <div><span data-i18n="contact.emailLabel">Email</span>: <a href="mailto:reception@taupart.com">reception@taupart.com</a></div>
+        </div>
+      </div>
+      <div class="contact-map" data-i18n="contact.mapPlaceholder">Карта появится здесь</div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-brand">
+        <div class="logo">Tauman Partners</div>
+        <p data-i18n="footer.tagline">Эксперты по оценке любого имущества и интеллектуальной собственности.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-heading" data-i18n="footer.servicesHeading">Услуги</div>
+        <a href="#services" data-i18n="services.groupRealEstate">Недвижимость</a>
+        <a href="#services" data-i18n="services.groupTransport">Транспорт и оборудование</a>
+        <a href="#services" data-i18n="services.groupBusiness">Бизнес и активы</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-heading" data-i18n="footer.companyHeading">Компания</div>
+        <a href="#about" data-i18n="nav.about">О компании</a>
+        <a href="#projects" data-i18n="nav.projects">Проекты</a>
+        <a href="#contact" data-i18n="nav.contacts">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-heading" data-i18n="footer.resourcesHeading">Ресурсы</div>
+        <a href="#useful" data-i18n="nav.useful">Полезное</a>
+        <a href="#" data-i18n="nav.partners">Партнёрам</a>
+        <a href="#" data-i18n="nav.status">Статус заказа</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.copyright">© 2026 ТОО «Tauman Partners»</div>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a>
+        <!-- Точка входа для сотрудников — ведёт в ReportExport/Telegram Mini App, URL уточняется (см. CLAUDE.md) -->
+        <a href="#" data-i18n="footer.staffLogin">Вход для сотрудников</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
