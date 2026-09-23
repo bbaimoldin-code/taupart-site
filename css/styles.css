@@ -1050,6 +1050,10 @@ button {
   justify-content: center;
 }
 
+.corporate-form {
+  margin-top: var(--space-6);
+}
+
 .form-panel {
   width: 100%;
   max-width: 640px;
@@ -1476,6 +1480,24 @@ button {
   margin-top: var(--space-4);
   font-size: 14px;
   color: var(--color-text-secondary);
+}
+
+.pricing-corporate-cta {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background: var(--color-bg-section);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.pricing-corporate-cta p {
+  font-size: 15px;
+  font-weight: 600;
+  max-width: 480px;
 }
 
 /* ---------- Director's address ---------- */

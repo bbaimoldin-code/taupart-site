@@ -268,11 +268,96 @@
     }
   }
 
+  function initCorporateForm() {
+    var form = document.getElementById("corporate-form");
+    if (!form) return;
+    var statusEl = document.getElementById("corporate-form-status");
+
+    function val(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+
+    function labelText(forId) {
+      var label = document.querySelector('label[for="' + forId + '"]');
+      return label ? label.textContent : "";
+    }
+
+    function collectData() {
+      return {
+        formType: "corporate",
+        company: val("corporate-company"),
+        bin: val("corporate-bin"),
+        name: val("corporate-name"),
+        phone: val("corporate-phone"),
+        email: val("corporate-email"),
+        description: val("corporate-description"),
+      };
+    }
+
+    var whatsappBtn = document.getElementById("corporate-whatsapp-btn");
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener("click", function () {
+        var data = collectData();
+        var lines = [];
+        if (data.company) lines.push(labelText("corporate-company") + ": " + data.company);
+        if (data.bin) lines.push(labelText("corporate-bin") + ": " + data.bin);
+        if (data.description) lines.push(labelText("corporate-description") + ": " + data.description);
+        if (data.name) lines.push(labelText("corporate-name") + ": " + data.name);
+        if (data.phone) lines.push(labelText("corporate-phone") + ": " + data.phone);
+        if (data.email) lines.push(labelText("corporate-email") + ": " + data.email);
+        var text = lines.filter(Boolean).join("\n");
+        window.open("https://wa.me/77003030120?text=" + encodeURIComponent(text), "_blank", "noopener");
+      });
+    }
+
+    if (statusEl) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var sendingEl = document.getElementById("i18n-status-sending");
+        var successEl = document.getElementById("i18n-status-success");
+        var errorEl = document.getElementById("i18n-status-error");
+        var dict = {
+          sending: sendingEl ? sendingEl.textContent : "…",
+          success: successEl ? successEl.textContent : "",
+          error: errorEl ? errorEl.textContent : "",
+        };
+
+        statusEl.hidden = false;
+        statusEl.className = "form-status is-sending";
+        statusEl.textContent = dict.sending;
+
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(collectData()),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("request_failed");
+            return res.json();
+          })
+          .then(function (json) {
+            if (!json.ok) throw new Error(json.error || "request_failed");
+            statusEl.className = "form-status is-success";
+            statusEl.textContent = dict.success;
+            form.reset();
+          })
+          .catch(function () {
+            statusEl.className = "form-status is-error";
+            statusEl.textContent = dict.error;
+          });
+      });
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initMobileNav();
     initNavDropdowns();
     initScrollReveal();
     initCounter();
     initPriceCalculator();
+    initCorporateForm();
   });
 })();
