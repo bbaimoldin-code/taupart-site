@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=47">
+  <link rel="stylesheet" href="css/styles.css?v=48">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -329,6 +329,8 @@
         <!-- Без бэкенда пока нет: заявка уходит письмом на почту компании (см. ИСТОРИЯ_ПРОЕКТА.md — аудит сайта отметил отсутствие формы как Critical) -->
         <form class="form-panel contact-form" action="mailto:info@taupart.com" method="post" enctype="text/plain">
           <h3 data-i18n="contact.formHeading">Оставить заявку</h3>
+          <span class="visually-hidden" id="i18n-price-from" data-i18n="contact.form.fromPrefix">от</span>
+          <span class="visually-hidden" id="i18n-price-negotiable" data-i18n="contact.form.totalNegotiable">по договорённости</span>
           <div class="form-fields">
             <div class="form-field">
               <label class="visually-hidden" for="lead-name" data-i18n="contact.form.nameLabel">Ваше имя</label>
@@ -343,20 +345,69 @@
               <input id="lead-email" name="email" type="email" data-i18n-placeholder="contact.form.emailLabel" placeholder="Email">
             </div>
             <div class="form-field">
-              <label class="visually-hidden" for="lead-object" data-i18n="contact.form.objectLabel">Тип объекта оценки</label>
+              <label class="visually-hidden" for="lead-object" data-i18n="contact.form.objectLabel">Объект оценки</label>
               <select id="lead-object" name="object_type">
-                <option data-i18n="nav.svc1">Оценка недвижимости</option>
-                <option data-i18n="nav.svc2">Оценка движимого имущества</option>
-                <option data-i18n="nav.svc3">Оценка нематериального актива</option>
-                <option data-i18n="nav.svc4">Оценка бизнеса и предприятия</option>
-                <option data-i18n="nav.svc5">Оценка ценных бумаг</option>
-                <option data-i18n="contact.form.objectOther">Другое</option>
+                <option value="" selected disabled data-i18n="contact.form.objectPlaceholder">Выберите объект оценки</option>
+
+                <option disabled data-i18n="pricing.catA">А. Недвижимость</option>
+                <option value="a1" data-price="25000" data-i18n="pricing.a1">Квартира</option>
+                <option value="a2" data-price="40000" data-i18n="pricing.a2">Жилой дом с земельным участком</option>
+                <option value="a3" data-price="70000" data-i18n="pricing.a3">Нежилое помещение, офис, магазин (до 500 м²)</option>
+                <option value="a4" data-price="100000" data-from="1" data-i18n="pricing.a4">Отдельно стоящее здание, склад, производственное здание</option>
+                <option value="a5" data-price="150000" data-from="1" data-i18n="pricing.a5">Производственно-хозяйственный комплекс (ферма, элеватор, зернохранилище, теплица)</option>
+                <option value="a6" data-price="150000" data-from="1" data-i18n="pricing.a6">Объект незавершённого строительства</option>
+
+                <option disabled data-i18n="pricing.catB">Б. Земельные участки</option>
+                <option value="b1" data-price="40000" data-from="1" data-i18n="pricing.b1">Земельный участок сельскохозяйственного назначения — до 100 га</option>
+                <option value="b2" data-price="60000" data-from="1" data-i18n="pricing.b2">Земельный участок сельскохозяйственного назначения — от 100 до 1 000 га</option>
+                <option value="b3" data-price="100000" data-from="1" data-i18n="pricing.b3">Земельный участок сельскохозяйственного назначения — от 1 000 до 5 000 га</option>
+                <option value="b4" data-negotiable="1" data-i18n="pricing.b4">Земельный участок сельскохозяйственного назначения — свыше 5 000 га</option>
+                <option value="b5" data-price="25000" data-i18n="pricing.b5">Земельный участок несельскохозяйственного назначения (ИЖС, коммерческий)</option>
+
+                <option disabled data-i18n="pricing.catC">В. Транспорт, спецтехника и оборудование</option>
+                <option value="c1" data-price="20000" data-i18n="pricing.c1">Легковой автомобиль</option>
+                <option value="c2" data-price="25000" data-i18n="pricing.c2">Грузовой автомобиль, автобус, прицеп</option>
+                <option value="c3" data-price="25000" data-i18n="pricing.c3">Трактор, комбайн, самоходная сельскохозяйственная техника</option>
+                <option value="c4" data-price="15000" data-i18n="pricing.c4">Каждая последующая единица самоходной техники в том же отчёте</option>
+                <option value="c5" data-price="10000" data-i18n="pricing.c5">Прицепное и навесное оборудование (сеялка, плуг, культиватор и т.п.)</option>
+                <option value="c6" data-price="40000" data-from="1" data-i18n="pricing.c6">Производственное и перерабатывающее оборудование</option>
+
+                <option disabled data-i18n="pricing.catD">Г. Скот и прочее движимое имущество</option>
+                <option value="d1" data-price="500" data-i18n="pricing.d1">Крупный рогатый скот, лошади, верблюды</option>
+                <option value="d2" data-price="250" data-i18n="pricing.d2">Мелкий рогатый скот, свиньи</option>
+                <option value="d3" data-price="40000" data-i18n="pricing.d3">Минимальная стоимость отчёта по сельскохозяйственным животным</option>
+                <option value="d4" data-price="50000" data-from="1" data-i18n="pricing.d4">Сельскохозяйственная продукция, корма, товарно-материальные запасы</option>
+                <option value="d5" data-price="40000" data-from="1" data-i18n="pricing.d5">Прочие основные средства и иное движимое имущество</option>
+
+                <option value="other" data-i18n="contact.form.objectOther">Другое</option>
               </select>
+            </div>
+            <div class="form-field form-field-qty">
+              <label for="lead-qty" data-i18n="contact.form.quantityLabel">Количество</label>
+              <input id="lead-qty" name="quantity" type="number" min="1" value="1">
+            </div>
+            <div class="form-field form-field-checkbox">
+              <label>
+                <input id="lead-referral" name="referral" type="checkbox" value="yes">
+                <span data-i18n="contact.form.referralLabel">Пришли по рекомендации</span>
+              </label>
+            </div>
+            <div class="form-field" id="lead-referral-name-field" hidden>
+              <label class="visually-hidden" for="lead-referral-name" data-i18n="contact.form.referralNamePlaceholder">Кто порекомендовал (ФИО или компания)</label>
+              <input id="lead-referral-name" name="referral_name" type="text" data-i18n-placeholder="contact.form.referralNamePlaceholder" placeholder="Кто порекомендовал (ФИО или компания)">
             </div>
             <div class="form-field">
               <label class="visually-hidden" for="lead-comment" data-i18n="contact.form.commentLabel">Комментарий</label>
               <textarea id="lead-comment" name="comment" data-i18n-placeholder="contact.form.commentLabel" placeholder="Комментарий"></textarea>
             </div>
+
+            <div class="form-total" id="lead-total" aria-live="polite">
+              <span class="form-total-label" data-i18n="contact.form.totalLabel">Итого</span>
+              <span class="form-total-value" id="lead-total-value">—</span>
+              <input type="hidden" id="lead-total-hidden" name="calculated_total" value="">
+            </div>
+            <p class="form-referral-note" id="lead-referral-note" data-i18n="contact.form.referralNote" hidden>Скидка по рекомендации предварительная — мы подтвердим её после того, как уточним, кто именно вас порекомендовал.</p>
+
             <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.form.submit">Отправить заявку</button>
           </div>
         </form>
@@ -420,7 +471,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=39"></script>
-  <script src="js/main.js?v=32"></script>
+  <script src="js/i18n.js?v=40"></script>
+  <script src="js/main.js?v=33"></script>
 </body>
 </html>

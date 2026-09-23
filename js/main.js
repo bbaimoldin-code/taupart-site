@@ -113,10 +113,75 @@
     observer.observe(el);
   }
 
+  var REFERRAL_DISCOUNT = 0.135; // 13.5% — см. ИСТОРИЯ_ПРОЕКТА.md (5 МРП на примере квартиры)
+
+  function initPriceCalculator() {
+    var select = document.getElementById("lead-object");
+    var qtyInput = document.getElementById("lead-qty");
+    var referralCheckbox = document.getElementById("lead-referral");
+    var referralNameField = document.getElementById("lead-referral-name-field");
+    var referralNote = document.getElementById("lead-referral-note");
+    var totalValue = document.getElementById("lead-total-value");
+    var totalHidden = document.getElementById("lead-total-hidden");
+    var fromPrefixEl = document.getElementById("i18n-price-from");
+    var negotiableEl = document.getElementById("i18n-price-negotiable");
+    if (!select || !totalValue) return;
+
+    function formatMoney(n) {
+      return Math.round(n).toLocaleString("ru-RU") + " ₸";
+    }
+
+    function update() {
+      var option = select.options[select.selectedIndex];
+      var isReferral = referralCheckbox && referralCheckbox.checked;
+
+      referralNameField && referralNameField.toggleAttribute("hidden", !isReferral);
+      referralNote && referralNote.toggleAttribute("hidden", !isReferral);
+
+      if (!option || !option.value || option.value === "other") {
+        totalValue.textContent = "—";
+        if (totalHidden) totalHidden.value = "";
+        return;
+      }
+
+      if (option.dataset.negotiable) {
+        var negotiableText = negotiableEl ? negotiableEl.textContent : "по договорённости";
+        totalValue.textContent = negotiableText;
+        if (totalHidden) totalHidden.value = negotiableText;
+        return;
+      }
+
+      var price = parseInt(option.dataset.price, 10);
+      if (!price) return;
+      var qty = qtyInput ? Math.max(1, parseInt(qtyInput.value, 10) || 1) : 1;
+      var total = price * qty;
+      if (isReferral) total = total * (1 - REFERRAL_DISCOUNT);
+
+      var formatted = formatMoney(total);
+      if (option.dataset.from) {
+        var fromPrefix = fromPrefixEl ? fromPrefixEl.textContent : "от";
+        formatted = fromPrefix + " " + formatted;
+      }
+
+      totalValue.textContent = formatted;
+      if (totalHidden) totalHidden.value = formatted;
+    }
+
+    select.addEventListener("change", update);
+    qtyInput && qtyInput.addEventListener("input", update);
+    referralCheckbox && referralCheckbox.addEventListener("change", update);
+    document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
+      btn.addEventListener("click", update);
+    });
+
+    update();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initMobileNav();
     initNavDropdowns();
     initScrollReveal();
     initCounter();
+    initPriceCalculator();
   });
 })();
