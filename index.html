@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="css/styles.css?v=50">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -326,11 +326,16 @@
           <div><span data-i18n="contact.emailLabel">Email</span>: <a href="mailto:info@taupart.com">info@taupart.com</a></div>
           <div><a href="https://wa.me/77003030120" class="whatsapp-link" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.6 0 0 3.6 0 8c0 1.4.4 2.8 1 4L0 16l4.2-1.1c1.2.6 2.5 1 3.8 1 4.4 0 8-3.6 8-8s-3.6-8-8-8zm4.6 11.4c-.2.5-1.1 1-1.5 1-.4 0-.9.1-3-.8s-3.4-2.9-3.5-3c-.1-.1-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4.2.4.6 1.4.7 1.5.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1.2-.2.6-.7.8-.9.2-.2.4-.2.6-.1l1.4.7c.2.1.3.2.4.3.1.1.1.6-.1 1.1z"/></svg><span data-i18n="contact.whatsapp">Написать в WhatsApp</span></a></div>
         </div>
-        <!-- Без бэкенда пока нет: заявка уходит письмом на почту компании (см. ИСТОРИЯ_ПРОЕКТА.md — аудит сайта отметил отсутствие формы как Critical) -->
-        <form class="form-panel contact-form" action="mailto:info@taupart.com" method="post" enctype="text/plain">
+        <!-- Заявка отправляется через Cloudflare Pages Function (functions/api/lead.js)
+             в Telegram-бот @taupart_bot. Резервный канал — кнопка WhatsApp ниже,
+             которая всегда работает независимо от бота (см. ИСТОРИЯ_ПРОЕКТА.md). -->
+        <form class="form-panel contact-form" id="lead-form">
           <h3 data-i18n="contact.formHeading">Оставить заявку</h3>
           <span class="visually-hidden" id="i18n-price-from" data-i18n="contact.form.fromPrefix">от</span>
           <span class="visually-hidden" id="i18n-price-negotiable" data-i18n="contact.form.totalNegotiable">по договорённости</span>
+          <span class="visually-hidden" id="i18n-status-sending" data-i18n="contact.form.statusSending">Отправляем…</span>
+          <span class="visually-hidden" id="i18n-status-success" data-i18n="contact.form.statusSuccess">Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+          <span class="visually-hidden" id="i18n-status-error" data-i18n="contact.form.statusError">Не получилось отправить заявку. Попробуйте написать в WhatsApp или позвонить нам напрямую.</span>
           <div class="form-fields">
             <div class="form-field">
               <label class="visually-hidden" for="lead-name" data-i18n="contact.form.nameLabel">Ваше имя</label>
@@ -408,7 +413,21 @@
             </div>
             <p class="form-referral-note" id="lead-referral-note" data-i18n="contact.form.referralNote" hidden>Скидка по рекомендации предварительная — мы подтвердим её после того, как уточним, кто именно вас порекомендовал.</p>
 
-            <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.form.submit">Отправить заявку</button>
+            <div class="form-field form-field-checkbox">
+              <label>
+                <input id="lead-consent" name="consent" type="checkbox" required value="yes">
+                <span><span data-i18n="contact.form.consentPre">Я согласен(-на) с </span><a href="privacy.html" target="_blank" rel="noopener" data-i18n="contact.form.consentLink">политикой обработки персональных данных</a><span data-i18n="contact.form.consentPost"></span></span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.form.submit">Отправить заявку</button>
+              <button type="button" id="lead-whatsapp-btn" class="btn btn-outline form-whatsapp-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.6 0 0 3.6 0 8c0 1.4.4 2.8 1 4L0 16l4.2-1.1c1.2.6 2.5 1 3.8 1 4.4 0 8-3.6 8-8s-3.6-8-8-8zm4.6 11.4c-.2.5-1.1 1-1.5 1-.4 0-.9.1-3-.8s-3.4-2.9-3.5-3c-.1-.1-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4.2.4.6 1.4.7 1.5.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1.2-.2.6-.7.8-.9.2-.2.4-.2.6-.1l1.4.7c.2.1.3.2.4.3.1.1.1.6-.1 1.1z"/></svg>
+                <span data-i18n="contact.form.whatsappSubmit">Написать в WhatsApp</span>
+              </button>
+            </div>
+            <p class="form-status" id="lead-form-status" role="status" aria-live="polite" hidden></p>
           </div>
         </form>
       </div>
@@ -461,6 +480,8 @@
         <a href="careers.html" data-i18n="nav.careers">Карьера</a>
       </div>
     </div>
+    <p class="footer-legal-note" data-i18n="footer.legalNote">Материалы сайта являются интеллектуальной собственностью ТОО «Tauman Partners». Информация на сайте, включая цены и условия оказания услуг, носит справочный характер и не является публичной офертой.</p>
+
     <div class="footer-bottom">
       <div><span data-i18n="footer.copyright">© 2026 ТОО «Tauman Partners»</span> <span data-i18n="footer.bin">· БИН уточняется</span></div>
       <div class="footer-bottom-links">
@@ -471,7 +492,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=40"></script>
-  <script src="js/main.js?v=33"></script>
+  <script src="js/i18n.js?v=42"></script>
+  <script src="js/main.js?v=35"></script>
 </body>
 </html>

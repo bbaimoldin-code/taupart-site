@@ -125,7 +125,35 @@
     var totalHidden = document.getElementById("lead-total-hidden");
     var fromPrefixEl = document.getElementById("i18n-price-from");
     var negotiableEl = document.getElementById("i18n-price-negotiable");
+    var nameInput = document.getElementById("lead-name");
+    var phoneInput = document.getElementById("lead-phone");
+    var emailInput = document.getElementById("lead-email");
+    var commentInput = document.getElementById("lead-comment");
+    var referralNameInput = document.getElementById("lead-referral-name");
+    var form = document.getElementById("lead-form");
+    var statusEl = document.getElementById("lead-form-status");
     if (!select || !totalValue) return;
+
+    function labelText(forId) {
+      var label = document.querySelector('label[for="' + forId + '"]');
+      return label ? label.textContent : "";
+    }
+
+    function collectLeadData() {
+      var option = select.options[select.selectedIndex];
+      var hasObject = option && option.value && option.value !== "other";
+      return {
+        name: nameInput ? nameInput.value.trim() : "",
+        phone: phoneInput ? phoneInput.value.trim() : "",
+        email: emailInput ? emailInput.value.trim() : "",
+        object: hasObject ? option.textContent.trim() : "",
+        quantity: hasObject && qtyInput ? qtyInput.value : "",
+        total: hasObject ? totalValue.textContent : "",
+        referral: !!(referralCheckbox && referralCheckbox.checked),
+        referralName: referralNameInput ? referralNameInput.value.trim() : "",
+        comment: commentInput ? commentInput.value.trim() : "",
+      };
+    }
 
     function formatMoney(n) {
       return Math.round(n).toLocaleString("ru-RU") + " ₸";
@@ -175,6 +203,71 @@
     });
 
     update();
+
+    var whatsappBtn = document.getElementById("lead-whatsapp-btn");
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener("click", function () {
+        var data = collectLeadData();
+        var lines = [];
+        if (data.object) {
+          lines.push(labelText("lead-object") + ": " + data.object);
+          if (data.quantity) lines.push(labelText("lead-qty") + ": " + data.quantity);
+          if (data.total) lines.push(document.querySelector(".form-total-label").textContent + ": " + data.total);
+        }
+        if (data.referral) {
+          var referralLabel = document.querySelector(".form-field-checkbox label span");
+          lines.push((referralLabel ? referralLabel.textContent : "") + (data.referralName ? ": " + data.referralName : ""));
+        }
+        if (data.comment) lines.push(labelText("lead-comment") + ": " + data.comment);
+        if (data.name) lines.push(labelText("lead-name") + ": " + data.name);
+        if (data.phone) lines.push(labelText("lead-phone") + ": " + data.phone);
+
+        var text = lines.filter(Boolean).join("\n");
+        var url = "https://wa.me/77003030120?text=" + encodeURIComponent(text);
+        window.open(url, "_blank", "noopener");
+      });
+    }
+
+    if (form && statusEl) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var sendingEl = document.getElementById("i18n-status-sending");
+        var successEl = document.getElementById("i18n-status-success");
+        var errorEl = document.getElementById("i18n-status-error");
+        var dict = {
+          sending: sendingEl ? sendingEl.textContent : "…",
+          success: successEl ? successEl.textContent : "",
+          error: errorEl ? errorEl.textContent : "",
+        };
+
+        statusEl.hidden = false;
+        statusEl.className = "form-status is-sending";
+        statusEl.textContent = dict.sending;
+
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(collectLeadData()),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("request_failed");
+            return res.json();
+          })
+          .then(function (json) {
+            if (!json.ok) throw new Error(json.error || "request_failed");
+            statusEl.className = "form-status is-success";
+            statusEl.textContent = dict.success;
+            form.reset();
+            update();
+          })
+          .catch(function () {
+            statusEl.className = "form-status is-error";
+            statusEl.textContent = dict.error;
+          });
+      });
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
