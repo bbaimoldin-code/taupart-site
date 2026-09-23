@@ -17,6 +17,43 @@
     });
   }
 
+  function initNavDropdowns() {
+    var dropdowns = document.querySelectorAll(".nav-item-dropdown");
+    if (!dropdowns.length) return;
+
+    function closeAll() {
+      dropdowns.forEach(function (d) {
+        d.classList.remove("is-open");
+        var trigger = d.querySelector(".nav-dropdown-trigger");
+        if (trigger) trigger.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    dropdowns.forEach(function (dropdown) {
+      var trigger = dropdown.querySelector(".nav-dropdown-trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var wasOpen = dropdown.classList.contains("is-open");
+        closeAll();
+        if (!wasOpen) {
+          dropdown.classList.add("is-open");
+          trigger.setAttribute("aria-expanded", "true");
+        }
+      });
+      dropdown.addEventListener("mouseenter", function () {
+        dropdowns.forEach(function (d) {
+          if (d !== dropdown) d.classList.remove("is-open");
+        });
+      });
+    });
+
+    document.addEventListener("click", closeAll);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAll();
+    });
+  }
+
   function initScrollReveal() {
     var items = document.querySelectorAll("[data-reveal]");
     if (!items.length) return;
@@ -78,6 +115,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initMobileNav();
+    initNavDropdowns();
     initScrollReveal();
     initCounter();
   });

@@ -15,3 +15,14 @@ desktop.ini
 # OS junk in any folder
 **/.DS_Store
 **/Thumbs.db
+
+# Commercial font files — not licensed for public redistribution
+HelveticaNeueW1G/
+
+# Internal working notes — not part of the public site
+CLAUDE.md
+ИСТОРИЯ_ПРОЕКТА.md
+ДИЗАЙН_КОНЦЕПЦИЯ.md
+ДИЗАЙИЙ_КОНЦЕПЦИЯ.md
+logo long.png
+logo short.png
