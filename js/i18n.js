@@ -204,7 +204,7 @@
       "footer.privacy": "Политика конфиденциальности",
       "footer.staffLogin": "Вход для сотрудников",
       "footer.copyright": "© 2026 ТОО «Tauman Partners»",
-      "footer.bin": "· БИН уточняется",
+      "footer.bin": "· БИН 181040005157",
 
       "partners.eyebrow": "Для банков, агентств и брокеров",
       "partners.title": "Партнёрская программа",
@@ -657,7 +657,7 @@
       "footer.privacy": "Құпиялылық саясаты",
       "footer.staffLogin": "Қызметкерлер үшін кіру",
       "footer.copyright": "© 2026 «Tauman Partners» ЖШС",
-      "footer.bin": "· БСН нақтыланады",
+      "footer.bin": "· БСН 181040005157",
 
       "partners.eyebrow": "Банктерге, агенттіктерге және брокерлерге",
       "partners.title": "Серіктестік бағдарламасы",
@@ -1110,7 +1110,7 @@
       "footer.privacy": "Privacy Policy",
       "footer.staffLogin": "Staff Login",
       "footer.copyright": "© 2026 Tauman Partners LLP",
-      "footer.bin": "· Business ID pending",
+      "footer.bin": "· Business ID (BIN) 181040005157",
 
       "partners.eyebrow": "For banks, agencies and brokers",
       "partners.title": "Partner Program",
