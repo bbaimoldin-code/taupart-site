@@ -127,7 +127,6 @@
     var negotiableEl = document.getElementById("i18n-price-negotiable");
     var nameInput = document.getElementById("lead-name");
     var phoneInput = document.getElementById("lead-phone");
-    var emailInput = document.getElementById("lead-email");
     var commentInput = document.getElementById("lead-comment");
     var referralNameInput = document.getElementById("lead-referral-name");
     var form = document.getElementById("lead-form");
@@ -145,7 +144,6 @@
       return {
         name: nameInput ? nameInput.value.trim() : "",
         phone: phoneInput ? phoneInput.value.trim() : "",
-        email: emailInput ? emailInput.value.trim() : "",
         object: hasObject ? option.textContent.trim() : "",
         quantity: hasObject && qtyInput ? qtyInput.value : "",
         total: hasObject ? totalValue.textContent : "",
