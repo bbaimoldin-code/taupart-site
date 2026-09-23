@@ -1054,6 +1054,24 @@ button {
   margin-top: var(--space-6);
 }
 
+.form-field-file label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  margin-bottom: 6px;
+}
+
+.form-field-file input[type="file"] {
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+.form-field-hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
 .form-panel {
   width: 100%;
   max-width: 640px;
@@ -1124,6 +1142,10 @@ button {
   margin-top: 4px;
   font-size: 13px;
   color: var(--color-error);
+}
+
+.form-field-error[hidden] {
+  display: none;
 }
 
 .form-field textarea {

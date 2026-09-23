@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=51">
+  <link rel="stylesheet" href="css/styles.css?v=53">
 </head>
 <body>
 
@@ -124,6 +124,12 @@
             <label class="visually-hidden" for="corporate-description" data-i18n="corporate.form.descriptionLabel">Опишите задачу: что нужно оценить, в каком объёме</label>
             <textarea id="corporate-description" name="description" required data-i18n-placeholder="corporate.form.descriptionLabel" placeholder="Опишите задачу: что нужно оценить, в каком объёме *"></textarea>
           </div>
+          <div class="form-field form-field-file">
+            <label for="corporate-file" data-i18n="corporate.form.fileLabel">Приложить файл (ТЗ, список объектов и т.п.)</label>
+            <input id="corporate-file" name="file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
+            <p class="form-field-hint" data-i18n="corporate.form.fileHint">До 15 МБ: PDF, Word, Excel или изображение</p>
+            <p class="form-field-error" id="corporate-file-error" data-i18n="corporate.form.fileTooBig" hidden>Файл больше 15 МБ — прикрепите файл поменьше или пришлите его отдельно на WhatsApp.</p>
+          </div>
 
           <div class="form-field form-field-checkbox">
             <label>
@@ -192,7 +198,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=44"></script>
-  <script src="js/main.js?v=37"></script>
+  <script src="js/i18n.js?v=45"></script>
+  <script src="js/main.js?v=38"></script>
 </body>
 </html>

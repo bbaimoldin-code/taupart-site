@@ -20,9 +20,23 @@ export async function onRequestPost(context) {
     });
   }
 
-  let data;
+  const contentType = request.headers.get("content-type") || "";
+  let data = {};
+  let file = null;
+
   try {
-    data = await request.json();
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      for (const [key, value] of formData.entries()) {
+        if (key === "file" && value && typeof value !== "string" && value.size > 0) {
+          file = value;
+        } else if (key !== "file") {
+          data[key] = value;
+        }
+      }
+    } else {
+      data = await request.json();
+    }
   } catch (e) {
     return new Response(JSON.stringify({ ok: false, error: "bad_request" }), {
       status: 400,
@@ -43,6 +57,7 @@ export async function onRequestPost(context) {
   if (data.referral) lines.push("По рекомендации: " + escapeHtml(data.referralName || "да"));
   if (data.description) lines.push("Описание задачи: " + escapeHtml(data.description));
   if (data.comment) lines.push("Комментарий: " + escapeHtml(data.comment));
+  if (file) lines.push("Приложен файл: " + escapeHtml(file.name));
 
   var text = lines.join("\n");
 
@@ -64,6 +79,27 @@ export async function onRequestPost(context) {
       status: 502,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  if (file) {
+    var fileForm = new FormData();
+    fileForm.append("chat_id", env.TELEGRAM_CHAT_ID);
+    fileForm.append("document", file, file.name);
+
+    var fileResponse = await fetch(
+      "https://api.telegram.org/bot" + env.TELEGRAM_BOT_TOKEN + "/sendDocument",
+      {
+        method: "POST",
+        body: fileForm,
+      }
+    );
+
+    if (!fileResponse.ok) {
+      return new Response(JSON.stringify({ ok: false, error: "telegram_file_failed" }), {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
   }
 
   return new Response(JSON.stringify({ ok: true }), {

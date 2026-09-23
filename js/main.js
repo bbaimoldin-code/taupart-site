@@ -272,6 +272,9 @@
     var form = document.getElementById("corporate-form");
     if (!form) return;
     var statusEl = document.getElementById("corporate-form-status");
+    var fileInput = document.getElementById("corporate-file");
+    var fileError = document.getElementById("corporate-file-error");
+    var MAX_FILE_SIZE = 15 * 1024 * 1024; // 15 МБ — см. ИСТОРИЯ_ПРОЕКТА.md
 
     function val(id) {
       var el = document.getElementById(id);
@@ -295,6 +298,21 @@
       };
     }
 
+    function fileTooBig() {
+      return !!(fileInput && fileInput.files[0] && fileInput.files[0].size > MAX_FILE_SIZE);
+    }
+
+    if (fileInput && fileError) {
+      fileInput.addEventListener("change", function () {
+        if (fileTooBig()) {
+          fileError.hidden = false;
+          fileInput.value = "";
+        } else {
+          fileError.hidden = true;
+        }
+      });
+    }
+
     var whatsappBtn = document.getElementById("corporate-whatsapp-btn");
     if (whatsappBtn) {
       whatsappBtn.addEventListener("click", function () {
@@ -306,6 +324,7 @@
         if (data.name) lines.push(labelText("corporate-name") + ": " + data.name);
         if (data.phone) lines.push(labelText("corporate-phone") + ": " + data.phone);
         if (data.email) lines.push(labelText("corporate-email") + ": " + data.email);
+        if (fileInput && fileInput.files[0]) lines.push("📎 " + fileInput.files[0].name + " (прикрепите файл отдельно здесь, в WhatsApp)");
         var text = lines.filter(Boolean).join("\n");
         window.open("https://wa.me/77003030120?text=" + encodeURIComponent(text), "_blank", "noopener");
       });
@@ -315,6 +334,10 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (!form.reportValidity()) return;
+        if (fileTooBig()) {
+          fileError.hidden = false;
+          return;
+        }
 
         var sendingEl = document.getElementById("i18n-status-sending");
         var successEl = document.getElementById("i18n-status-success");
@@ -329,10 +352,26 @@
         statusEl.className = "form-status is-sending";
         statusEl.textContent = dict.sending;
 
+        var payload = collectData();
+        var hasFile = fileInput && fileInput.files[0];
+        var body, headers;
+        if (hasFile) {
+          var fd = new FormData();
+          Object.keys(payload).forEach(function (key) {
+            fd.append(key, payload[key]);
+          });
+          fd.append("file", fileInput.files[0]);
+          body = fd;
+          headers = {};
+        } else {
+          body = JSON.stringify(payload);
+          headers = { "Content-Type": "application/json" };
+        }
+
         fetch("/api/lead", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(collectData()),
+          headers: headers,
+          body: body,
         })
           .then(function (res) {
             if (!res.ok) throw new Error("request_failed");

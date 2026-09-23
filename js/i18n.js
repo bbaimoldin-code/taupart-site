@@ -424,6 +424,9 @@
       "corporate.form.binLabel": "БИН",
       "corporate.form.contactLabel": "Контактное лицо",
       "corporate.form.descriptionLabel": "Опишите задачу: что нужно оценить, в каком объёме",
+      "corporate.form.fileLabel": "Приложить файл (ТЗ, список объектов и т.п.)",
+      "corporate.form.fileHint": "До 15 МБ: PDF, Word, Excel или изображение",
+      "corporate.form.fileTooBig": "Файл больше 15 МБ — прикрепите файл поменьше или пришлите его отдельно на WhatsApp.",
       "corporate.pricingCta": "Работаете с большим объёмом объектов или нужно официальное коммерческое предложение?",
       "corporate.pricingCtaLink": "Оставить заявку на КП",
 
@@ -874,6 +877,9 @@
       "corporate.form.binLabel": "БСН",
       "corporate.form.contactLabel": "Байланыс тұлғасы",
       "corporate.form.descriptionLabel": "Тапсырманы сипаттаңыз: нені, қандай көлемде бағалау керек",
+      "corporate.form.fileLabel": "Файл тіркеу (ТТ, объектілер тізімі және т.б.)",
+      "corporate.form.fileHint": "15 МБ дейін: PDF, Word, Excel немесе сурет",
+      "corporate.form.fileTooBig": "Файл 15 МБ-тан үлкен — кішірек файл тіркеңіз немесе оны WhatsApp арқылы бөлек жіберіңіз.",
       "corporate.pricingCta": "Көлемді объектілермен жұмыс істейсіз бе немесе ресми коммерциялық ұсыныс керек пе?",
       "corporate.pricingCtaLink": "КҰ өтінімін қалдыру",
 
@@ -1324,6 +1330,9 @@
       "corporate.form.binLabel": "Business ID (BIN)",
       "corporate.form.contactLabel": "Contact person",
       "corporate.form.descriptionLabel": "Describe your task: what needs appraisal, and at what volume",
+      "corporate.form.fileLabel": "Attach a file (brief, list of properties, etc.)",
+      "corporate.form.fileHint": "Up to 15 MB: PDF, Word, Excel, or image",
+      "corporate.form.fileTooBig": "File is larger than 15 MB — please attach a smaller file or send it separately via WhatsApp.",
       "corporate.pricingCta": "Working with a large volume of properties, or need a formal commercial proposal?",
       "corporate.pricingCtaLink": "Request a proposal",
 
