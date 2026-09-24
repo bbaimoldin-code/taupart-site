@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=53">
+  <link rel="stylesheet" href="css/styles.css?v=54">
 </head>
 <body>
 
@@ -82,7 +82,7 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.6 0 0 3.6 0 8c0 1.4.4 2.8 1 4L0 16l4.2-1.1c1.2.6 2.5 1 3.8 1 4.4 0 8-3.6 8-8s-3.6-8-8-8zm4.6 11.4c-.2.5-1.1 1-1.5 1-.4 0-.9.1-3-.8s-3.4-2.9-3.5-3c-.1-.1-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4.2.4.6 1.4.7 1.5.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1.2-.2.6-.7.8-.9.2-.2.4-.2.6-.1l1.4.7c.2.1.3.2.4.3.1.1.1.6-.1 1.1z"/></svg>
         </a>
       </div>
-      <a href="status.html" class="btn btn-primary is-active" aria-current="page" data-i18n="nav.status">Статус заказа</a>
+      <a href="https://status.taupart.com" class="btn btn-primary" data-i18n="nav.status">Статус заказа</a>
       <button type="button" class="nav-toggle" aria-expanded="false" aria-label="Открыть меню">
         <span></span><span></span><span></span>
       </button>
@@ -96,14 +96,22 @@
       <h1 class="page-title" data-i18n="status.title">Статус заказа</h1>
       <p class="section-subtitle" data-i18n="status.intro">Отслеживание заказа по трек-коду — без личного кабинета, логина и пароля.</p>
 
-      <!-- Механизм трек-кода ещё не подключён к бэкенду/реестру (см. ИСТОРИЯ_ПРОЕКТА.md) — честная заглушка,
-           не выдаём несуществующую форму поиска. Форма появится, когда определится хостинг и бэкенд. -->
+      <!-- Форма проверки статуса — обычный HTML GET на status.taupart.com (проект ReportExport),
+           без JS и без своего бэкенда. Код проверяется и ищется полностью на стороне status.taupart.com. -->
       <div class="useful-panel status-panel">
-        <p data-i18n="status.placeholder">Онлайн-проверка статуса по трек-коду ещё не запущена. Если вы уже оставили заявку и хотите узнать её статус — свяжитесь с нами напрямую, мы ответим быстро.</p>
-        <div class="status-contacts">
-          <a href="tel:+77003030120" class="btn btn-outline">+7 700 30 30 120</a>
-          <a href="mailto:info@taupart.com" class="btn btn-outline">info@taupart.com</a>
-          <a href="https://wa.me/77003030120" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+        <form action="https://status.taupart.com/" method="get" class="status-form">
+          <label class="visually-hidden" for="status-code" data-i18n="status.form.label">Код заказа</label>
+          <input id="status-code" name="code" type="text" placeholder="ABCD-EFGH-JKLM" maxlength="20" required>
+          <button type="submit" class="btn btn-primary" data-i18n="status.form.submit">Проверить</button>
+        </form>
+        <p class="status-form-hint" data-i18n="status.form.hint">Код указан в письме или сообщении от оценщика — 12 букв и цифр, с дефисами или без, регистр не важен.</p>
+        <div class="status-contacts-intro">
+          <p data-i18n="status.noCode">Нет кода под рукой? Свяжитесь с нами напрямую:</p>
+          <div class="status-contacts">
+            <a href="tel:+77003030120" class="btn btn-outline">+7 700 30 30 120</a>
+            <a href="mailto:info@taupart.com" class="btn btn-outline">info@taupart.com</a>
+            <a href="https://wa.me/77003030120" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
       </div>
     </section>
@@ -138,7 +146,7 @@
         <a href="pricing.html" data-i18n="nav.pricing">Тарифы</a>
         <a href="corporate.html" data-i18n="nav.corporate">Коммерческое предложение</a>
         <a href="quality.html" data-i18n="nav.quality">Контроль качества</a>
-        <a href="status.html" data-i18n="nav.status">Статус заказа</a>
+        <a href="https://status.taupart.com" data-i18n="nav.status">Статус заказа</a>
         <a href="faq.html" data-i18n="nav.faq">Частые вопросы</a>
         <a href="banks.html" data-i18n="nav.banks">Банки-партнёры</a>
         <a href="case-studies.html" data-i18n="nav.caseStudies">Проекты и кейсы</a>
@@ -157,7 +165,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=46"></script>
+  <script src="js/i18n.js?v=47"></script>
   <script src="js/main.js?v=38"></script>
 </body>
 </html>
