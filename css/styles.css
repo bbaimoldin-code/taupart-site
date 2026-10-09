@@ -1531,17 +1531,6 @@ button {
   border-top: 1px solid var(--color-line);
 }
 
-.director-photo {
-  float: right;
-  width: 132px;
-  height: 132px;
-  border-radius: 50%;
-  object-fit: cover;
-  shape-outside: circle(50%);
-  shape-margin: 10px;
-  margin: 4px 0 20px 28px;
-}
-
 .director-letter p {
   font-size: 16px;
   line-height: 1.7;
@@ -2228,12 +2217,6 @@ button {
 
   .nav-dropdown-group-label {
     padding: 6px 0 4px;
-  }
-
-  .director-photo {
-    float: none;
-    display: block;
-    margin: 0 0 var(--space-3);
   }
 }
 
