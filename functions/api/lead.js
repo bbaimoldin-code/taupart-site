@@ -45,7 +45,9 @@ export async function onRequestPost(context) {
   }
 
   var isCorporate = data.formType === "corporate";
-  var lines = [isCorporate ? "<b>Запрос коммерческого предложения</b>" : "<b>Новая заявка с сайта</b>"];
+  var isPartner = data.formType === "partner";
+  var lines = [isCorporate ? "<b>Запрос коммерческого предложения</b>" : isPartner ? "<b>Заявка на партнёрство</b>" : "<b>Новая заявка с сайта</b>"];
+  if (data.organization) lines.push("Организация: " + escapeHtml(data.organization));
   if (data.company) lines.push("Компания: " + escapeHtml(data.company));
   if (data.bin) lines.push("БИН: " + escapeHtml(data.bin));
   if (data.name) lines.push((isCorporate ? "Контактное лицо" : "Имя") + ": " + escapeHtml(data.name));

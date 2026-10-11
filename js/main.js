@@ -412,6 +412,54 @@
     }
   }
 
+  function initPartnerForm() {
+    var form = document.getElementById("partner-form");
+    var statusEl = document.getElementById("partner-form-status");
+    if (!form || !statusEl) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var text = function (id) {
+        var el = document.getElementById(id);
+        return el ? el.textContent : "";
+      };
+      var val = function (id) {
+        var el = document.getElementById(id);
+        return el ? el.value.trim() : "";
+      };
+      statusEl.hidden = false;
+      statusEl.className = "form-status is-sending";
+      statusEl.textContent = text("i18n-status-sending");
+      fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType: "partner",
+          name: val("partner-name"),
+          organization: val("partner-org"),
+          phone: val("partner-phone"),
+          email: val("partner-email"),
+          comment: val("partner-comment"),
+        }),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("request_failed");
+          return res.json();
+        })
+        .then(function (json) {
+          if (!json.ok) throw new Error(json.error || "request_failed");
+          statusEl.className = "form-status is-success";
+          statusEl.textContent = text("i18n-status-success");
+          trackEvent("generate_lead", { form_name: "partner", page_path: location.pathname });
+          form.reset();
+        })
+        .catch(function () {
+          statusEl.className = "form-status is-error";
+          statusEl.textContent = text("i18n-status-error");
+        });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initMobileNav();
     initNavDropdowns();
@@ -420,5 +468,6 @@
     initPriceCalculator();
     initCorporateForm();
     initContactTracking();
+    initPartnerForm();
   });
 })();

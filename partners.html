@@ -161,8 +161,11 @@
     </section>
 
     <section class="partners-form-section" data-reveal>
-      <!-- Без бэкенда/CRM пока нет: заявка уходит письмом на почту компании (см. ИСТОРИЯ_ПРОЕКТА.md — статус заказа и интеграции решено делать отдельным шагом позже) -->
-      <form class="form-panel" action="mailto:info@taupart.com" method="post" enctype="text/plain">
+      <!-- Заявка уходит на /api/lead (Cloudflare Pages Function → Telegram), как и остальные формы -->
+      <form class="form-panel" id="partner-form">
+        <span class="visually-hidden" id="i18n-status-sending" data-i18n="contact.form.statusSending">Отправляем…</span>
+        <span class="visually-hidden" id="i18n-status-success" data-i18n="contact.form.statusSuccess">Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+        <span class="visually-hidden" id="i18n-status-error" data-i18n="contact.form.statusError">Не получилось отправить заявку. Попробуйте написать в WhatsApp или позвонить нам напрямую.</span>
         <h2 data-i18n="partners.form.heading">Стать партнёром</h2>
         <p class="form-panel-subtitle" data-i18n="partners.form.subtitle">Оставьте заявку — мы свяжемся и обсудим условия сотрудничества.</p>
         <div class="form-fields">
@@ -187,6 +190,7 @@
             <textarea id="partner-comment" name="comment" data-i18n-placeholder="partners.form.commentLabel" placeholder="Комментарий"></textarea>
           </div>
           <button type="submit" class="btn btn-primary form-submit" data-i18n="partners.form.submit">Отправить заявку</button>
+          <p class="form-status" id="partner-form-status" role="status" aria-live="polite" hidden></p>
         </div>
       </form>
     </section>
@@ -241,7 +245,7 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=48"></script>
-  <script src="js/main.js?v=39"></script>
+  <script src="js/i18n.js?v=49"></script>
+  <script src="js/main.js?v=40"></script>
 </body>
 </html>
