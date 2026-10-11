@@ -1,6 +1,25 @@
 (function () {
   "use strict";
 
+  // Аналитика (GA4): отправка события, если счётчик загружен и не заблокирован.
+  function trackEvent(name, params) {
+    try {
+      if (typeof window.gtag === "function") window.gtag("event", name, params || {});
+    } catch (e) {}
+  }
+
+  function initContactTracking() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      var href = a.getAttribute("href") || "";
+      var method = href.indexOf("tel:") === 0 ? "phone"
+        : href.indexOf("mailto:") === 0 ? "email"
+        : href.indexOf("wa.me") !== -1 ? "whatsapp" : "";
+      if (method) trackEvent("contact_click", { method: method, page_path: location.pathname });
+    });
+  }
+
   function initMobileNav() {
     var toggle = document.querySelector(".nav-toggle");
     var nav = document.querySelector(".main-nav");
@@ -257,6 +276,7 @@
             if (!json.ok) throw new Error(json.error || "request_failed");
             statusEl.className = "form-status is-success";
             statusEl.textContent = dict.success;
+            trackEvent("generate_lead", { form_name: "lead", page_path: location.pathname });
             form.reset();
             update();
           })
@@ -381,6 +401,7 @@
             if (!json.ok) throw new Error(json.error || "request_failed");
             statusEl.className = "form-status is-success";
             statusEl.textContent = dict.success;
+            trackEvent("generate_lead", { form_name: "corporate", page_path: location.pathname });
             form.reset();
           })
           .catch(function () {
@@ -398,5 +419,6 @@
     initCounter();
     initPriceCalculator();
     initCorporateForm();
+    initContactTracking();
   });
 })();
